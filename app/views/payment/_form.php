@@ -32,8 +32,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'course_group_id')->textInput() ?>
 
-    <?= $form->field($model, 'approved_at')->textInput() ?>
-
     <?= $form->field($model, 'approved_by')->textInput() ?>
 
     <?= $form->field($model, 'scan_path')->textInput(['maxlength' => true]) ?>
