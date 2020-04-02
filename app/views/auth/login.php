@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php ActiveForm::end(); ?>
 	
 	<div class="pt-3">
-		<p>Еще не заренистрированы? <?= Html::a('Регистрация', ['auth/register']) ?></p>
+		<p>Еще не зарегистрированы? <?= Html::a('Регистрация', ['auth/register']) ?></p>
 		<p>Забыли свой пароль? <?= Html::a('Восстановление', ['auth/password-request']) ?></p>
 	</div>
 

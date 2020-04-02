@@ -59,6 +59,11 @@ use app\modules\admin\widgets\Menu;
 						'active' => 'users' === Yii::$app->controller->id,
 					],
 					[
+						'label'  => 'Платежи',
+						'icon'   => 'fas fa-ruble-sign',
+						'url'    => ['/admin/payments'],
+					],
+					[
 						'label'  => 'Доступы',
 						'icon'   => 'fas fa-lock',
 						'url'    => ['/admin/rbac/permissions'],
