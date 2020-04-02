@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'student_id')->textInput() ?>
+    <?= $form->field($model, 'student_id')->hiddenInput(['value' => Yii::$app->user->id])->label(false); ?>
 
     <? //$form->field($model, 'payed_at')->textInput() ?>
     <?= \kartik\datetime\DateTimePicker::widget([
@@ -28,11 +28,9 @@ use yii\widgets\ActiveForm;
         ]
     ]); ?>
 
-    <?= $form->field($model, 'sum')->textInput() ?>
+    <?= $form->field($model, 'sum')->textInput(['value'=> $_GET['price'] ?? -1]) ?>
 
-    <?= $form->field($model, 'course_group_id')->textInput() ?>
-
-    <?= $form->field($model, 'approved_by')->textInput() ?>
+    <?= $form->field($model, 'course_group_id')->hiddenInput(['value'=> $_GET['courseGroupId'] ?? -1])->label(false); ?>
 
     <?= $form->field($model, 'scan_path')->textInput(['maxlength' => true]) ?>
 

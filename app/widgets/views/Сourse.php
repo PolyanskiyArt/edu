@@ -19,7 +19,7 @@ use app\widgets\Course; ?>
 <?foreach ($courses as $course) { ?>
 <div class="mdl-cell demo-card-wide mdl-card mdl-shadow--2dp">
     <div class="mdl-card__title">
-        <span><kbd class="mdl-card__title-text mdl-color-text--black"><?= $course->name ?></kbd></span>
+        <span><kbd class="mdl-card__title-text mdl-color-text--white"><?= $course->name ?></kbd></span>
     </div>
     <div class="mdl-card__supporting-text">
         <?= $course->description ?>
