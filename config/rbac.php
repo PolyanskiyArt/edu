@@ -36,6 +36,7 @@ return [
 		'allowActions' => [
 			'site/*',
 			'auth/*',
+			'payment/*',
 		],
 	],
 

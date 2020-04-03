@@ -14,27 +14,25 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'student_id')->textInput() ?>
+    <?= $form->field($model, 'student_id')->hiddenInput(['value' => $student_id])->label(false); ?>
 
     <? //$form->field($model, 'payed_at')->textInput() ?>
     <?= \kartik\datetime\DateTimePicker::widget([
-        'name' => 'payed_at',
+        'name' => 'Payment[payed_at]',
         'options' => ['placeholder' => 'Выбор времени оплаты ...'],
         'convertFormat' => true,
         'pluginOptions' => [
-            'format' => 'dd MM yyyy h:i',
-            'startDate' => date('dd MM yyyy h:i'),
+            'format' => 'yyyy-MM-dd h:i',
+            'startDate' => date('yyyy-MM-dd h:i'),
             'todayHighlight' => true
         ]
     ]); ?>
 
-    <?= $form->field($model, 'sum')->textInput() ?>
+    <?= $form->field($model, 'sum')->textInput(['value'=> $sum ]) ?>
 
-    <?= $form->field($model, 'course_group_id')->textInput() ?>
+    <?= $form->field($model, 'course_group_id')->hiddenInput(['value'=> $course_group_id])->label(false); ?>
 
-    <?= $form->field($model, 'approved_by')->textInput() ?>
-
-    <?= $form->field($model, 'scan_path')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'file')->fileInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

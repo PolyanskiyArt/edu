@@ -18,7 +18,7 @@ class PaymentSearch extends Payment
     {
         return [
             [['id', 'student_id', 'sum', 'course_group_id', 'approved_by'], 'integer'],
-            [['payed_at', 'approved_at', 'scan_path'], 'safe'],
+            [['payed_at', 'approved_at', 'filename'], 'safe'],
         ];
     }
 
@@ -67,7 +67,7 @@ class PaymentSearch extends Payment
             'approved_by' => $this->approved_by,
         ]);
 
-        $query->andFilterWhere(['like', 'scan_path', $this->scan_path]);
+        $query->andFilterWhere(['like', 'filename', $this->filename]);
 
         return $dataProvider;
     }

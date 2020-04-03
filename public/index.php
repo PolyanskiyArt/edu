@@ -15,4 +15,6 @@ $config = \yii\helpers\ArrayHelper::merge(
 	require(__DIR__ . '/../config/rbac.php')
 );
 
+require(__DIR__ . '/../app/helpers/FileHelper.php');
+
 (new yii\web\Application($config))->run();

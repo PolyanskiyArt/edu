@@ -20,7 +20,7 @@ use app\widgets\Course; ?>
     <?foreach ($courseGroups as $courseGroup) { ?>
         <div class="mdl-cell demo-card-wide mdl-card mdl-shadow--2dp">
             <div class="mdl-card__title">
-                <span><kbd class="mdl-card__title-text mdl-color-text--black"><?= $courseGroup->course->name ?></kbd></span>
+                <span><kbd class="mdl-card__title-text mdl-color-text--white"><?= $courseGroup->course->name ?></kbd></span>
             </div>
             <div class="mdl-card__supporting-text">
                 <?= $courseGroup->course->description ?>
@@ -28,10 +28,10 @@ use app\widgets\Course; ?>
                 <br>Начало: <?=  Yii::$app->formatter->asDate($courseGroup->date_start, 'php:d F Y') ?>
             </div>
             <div class="mdl-card__actions mdl-card--border">
-                <a href="<?=Yii::$app->urlManager->createUrl(['course-group/view', 'id' => $courseGroup->id])?>" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                <a href="<?=Yii::$app->urlManager->createUrl(['course-group/view', 'id' => $courseGroup->id ])?>" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                     Подробнее
                 </a>
-                <a href="<?=Yii::$app->urlManager->createUrl([Yii::$app->user ? 'payment/create' : 'auth/login', 'id' => $courseGroup->id])?>" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                <a href="<?=Yii::$app->urlManager->createUrl([Yii::$app->user ? 'payment/create' : 'auth/login', 'price' =>  $courseGroup->course->price, 'courseGroupId' => $courseGroup->id])?>" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                     Купить
                 </a>
 

@@ -29,7 +29,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'approved_by') ?>
 
-    <?php // echo $form->field($model, 'scan_path') ?>
+    <?php // echo $form->field($model, 'filename') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
