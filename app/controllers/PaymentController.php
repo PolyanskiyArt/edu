@@ -2,12 +2,15 @@
 
 namespace app\controllers;
 
+use app\models\CourseGroup;
 use Yii;
 use app\models\Payment;
 use app\models\PaymentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use app\helpers\FileHelper;
 
 /**
  * PaymentController implements the CRUD actions for Payment model.
@@ -67,12 +70,32 @@ class PaymentController extends Controller
         $model = new Payment();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $model->file = UploadedFile::getInstance($model, 'file');
+            $model->filename = FileHelper::genImageName($model->course_group_id, $model->student_id, $model->file->extension);
+            $model->save();
+
+            if ($model->upload($model->filename)) {
+                Yii::$app->session->setFlash('success', 'Изображение загружено');
+                return $this->refresh();
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        $sum = $_GET['price'];
+        $student_id = Yii::$app->user->id;
+        $course_group_id = $_GET['courseGroupId'];
+
+        $param = compact('model', 'sum', 'student_id', 'course_group_id');
+
+        return $this->render('create', $param );
+
+//        return $this->render('create', [
+//            'model' => $model,
+//            'sum' => $sum,
+//            'student_id' => $student_id,
+//            'course_group_id' => $course_group_id,
+//        ]);
     }
 
     /**

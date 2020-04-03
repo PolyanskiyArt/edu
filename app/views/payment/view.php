@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'course_group_id',
             'approved_at',
             'approved_by',
-            'scan_path',
+            'filename',
         ],
     ]) ?>
 

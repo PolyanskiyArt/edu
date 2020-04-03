@@ -1,6 +1,7 @@
 <?php
 
 \Yii::setAlias('@app', dirname(__DIR__) . '/app');
+\Yii::setAlias('@uploads', dirname(__DIR__) . '/uploads');
 
 $db       = require __DIR__ . '/db.php';
 $settings = require __DIR__ . '/settings.php';

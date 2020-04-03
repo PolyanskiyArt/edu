@@ -14,13 +14,19 @@ use Yii;
  * @property int $course_group_id Идентификатор группы в которую он вступает
  * @property string $approved_at Время подтверждения платежа
  * @property int $approved_by Пользователь подтвердивший платеж
- * @property string $scan_path
+ * @property string $filename
  *
  * @property User $approvedBy
  * @property User $student
  */
 class Payment extends \yii\db\ActiveRecord
 {
+
+    /**
+     * @var UploadedFile
+     */
+    public $file;
+
     /**
      * {@inheritdoc}
      */
@@ -35,13 +41,37 @@ class Payment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['student_id', 'course_group_id', 'scan_path'], 'required'],
+            ['file', 'image',
+                'extensions' => ['jpg', 'jpeg', 'png', 'gif'],
+                'checkExtensionByMimeType' => true,
+                'maxSize' => 512000, // 500 килобайт = 500 * 1024 байта = 512 000 байт
+                'tooBig' => 'Limit is 500KB'
+            ],
+            [['student_id', 'course_group_id'], 'required'],
             [['student_id', 'sum', 'course_group_id', 'approved_by'], 'integer'],
             [['payed_at', 'approved_at'], 'safe'],
-            [['scan_path'], 'string', 'max' => 250],
+            [['filename'], 'string', 'max' => 250],
             [['approved_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['approved_by' => 'id']],
             [['student_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['student_id' => 'id']],
         ];
+    }
+
+    /**
+     * Загружает файл с именем $courseGroupId_$userId.расширение в каталог uploads/
+     * @param $courseGroupId - ID курса
+     * @param $userId        - ID студента
+     * @return bool          - true, если загружен успешно
+     */
+    public function upload(string $filename)
+    {
+        if ($this->validate()) {
+            $dir =  Yii::getAlias('@uploads'); // Директория - должна быть создана
+            $file = $dir . '/' . $filename;
+            $this->file->saveAs($file); // Сохраняем файл
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -57,7 +87,8 @@ class Payment extends \yii\db\ActiveRecord
             'course_group_id' => 'Идентификатор группы',
             'approved_at' => 'Время подтверждения',
             'approved_by' => 'Идентификатор апрувера',
-            'scan_path' => 'Путь к скану чека',
+            'filename' => 'Путь к скану чека',
+            'file' => 'Квитанция',
         ];
     }
 
