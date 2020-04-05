@@ -46,6 +46,7 @@ class PaymentSearch extends Payment
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => ['defaultOrder' => ['student_id' => SORT_ASC]],
         ]);
 
         $this->load($params);

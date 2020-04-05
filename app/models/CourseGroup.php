@@ -36,6 +36,7 @@ class CourseGroup extends \yii\db\ActiveRecord
             [['date_start'], 'safe'],
             [['comment'], 'string'],
             [['course_id'], 'exist', 'skipOnError' => true, 'targetClass' => Course::className(), 'targetAttribute' => ['course_id' => 'id']],
+            [['course_id'], 'exist', 'skipOnError' => true, 'targetClass' => Payment::className(), 'targetAttribute' => ['course_group_id' => 'id']],
         ];
     }
 
@@ -58,6 +59,14 @@ class CourseGroup extends \yii\db\ActiveRecord
     public function getCourse()
     {
         return $this->hasOne(Course::className(), ['id' => 'course_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPayment()
+    {
+        return $this->hasOne(Payment::className(), ['course_group_id' => 'id'])->filterWhere(['student_id' => Yii::$app->user->id]);
     }
 
     /**
