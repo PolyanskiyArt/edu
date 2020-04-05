@@ -53,6 +53,7 @@ class Payment extends \yii\db\ActiveRecord
             [['filename'], 'string', 'max' => 250],
             [['approved_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['approved_by' => 'id']],
             [['student_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['student_id' => 'id']],
+            [['course_group_id'], 'exist', 'skipOnError' => true, 'targetClass' => CourseGroup::className(), 'targetAttribute' => ['id' => 'course_group_id']],
         ];
     }
 
@@ -87,7 +88,7 @@ class Payment extends \yii\db\ActiveRecord
             'course_group_id' => 'Идентификатор группы',
             'approved_at' => 'Время подтверждения',
             'approved_by' => 'Идентификатор апрувера',
-            'filename' => 'Путь к скану чека',
+            'filename' => 'Скан чека',
             'file' => 'Квитанция',
         ];
     }
@@ -106,5 +107,13 @@ class Payment extends \yii\db\ActiveRecord
     public function getStudent()
     {
         return $this->hasOne(User::className(), ['id' => 'student_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCourseGroup()
+    {
+        return $this->hasMany(CourseGroup::className(), ['id' => 'course_group_id']);
     }
 }
