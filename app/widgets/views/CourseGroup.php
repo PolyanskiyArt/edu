@@ -38,7 +38,6 @@ use app\widgets\Course; ?>
 
                 <?php
                 $btnLabel = 'Купить';
-
                 if (Yii::$app->user) { // зарегисстрированный пользователь?
                     // купил уже эту группу?
                     if (is_null($courseGroup->payment)) {// не купил
@@ -49,8 +48,8 @@ use app\widgets\Course; ?>
                         } else {
                             $btnLabel = 'Оплата подтверждена';
                         }
+                        $url = Yii::$app->urlManager->createUrl(['payment/view', 'id' => $courseGroup->payment->id]);
                     }
-                    $url = Yii::$app->urlManager->createUrl(['payment/view', 'id' => $courseGroup->payment->id]);
                 } else { // не зарегистрировался, перейти на регистрацию
                     $url = Yii::$app->urlManager->createUrl(['auth/login', 'price' => $courseGroup->course->price, 'courseGroupId' => $courseGroup->id]);
                 }
