@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\valueObject\ImportantMessageValueObject;
 use Yii;
 
 /**
@@ -17,12 +18,6 @@ use Yii;
  */
 class PersonalMessage extends \yii\db\ActiveRecord
 {
-    const IMPORTANT_STATE = [
-        'none',
-        'important',
-        'very important'
-    ];
-
     public static function tableName()
     {
         return 'personal_message';
@@ -35,7 +30,7 @@ class PersonalMessage extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['from_user_id', 'to_user_id', 'important_state'], 'integer'],
             [['text'], 'string', 'max' => 150],
-            ['status', 'in', 'range' => array_keys(self::IMPORTANT_STATE)],
+            ['status', 'in', 'range' => array_keys(ImportantMessageValueObject::STATE)],
             [['from_user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['from_user_id' => 'id']],
             [['to_user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['to_user_id' => 'id']],
 
