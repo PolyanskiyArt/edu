@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap4\Nav;
 use app\modules\admin\widgets\Menu;
+use app\repository\CourseRepository;
 
 ?>
 <!-- Main Sidebar Container -->
@@ -37,6 +38,12 @@ use app\modules\admin\widgets\Menu;
 			</div>
 		</div>
 		<!-- Sidebar Menu -->
+        <?php
+            $myCourses = (new CourseRepository())->getPayedByUserId(Yii::$app->user->id);
+            $myCoursesItems = array_combine(array_column($myCourses, 'id'), array_column($myCourses,'name'));
+            dump('Мои купленные курсы:');
+            dump($myCoursesItems);
+        ?>
 		<nav class="mt-2">
 			<?= Menu::widget([
 				'options' => [
@@ -80,6 +87,15 @@ use app\modules\admin\widgets\Menu;
 							],
 						],
 					],
+                    [
+                        'label' => 'Мои курсы',
+                        'icon'  => 'fas fa-television',
+                        'url'   => '#',
+                        'items' => [
+                            ['label' => 'Gii', 'url' => ['/gii'], 'attributes' => 'target="_blank"'],
+                            ['label' => 'Debug', 'url' => ['/debug'], 'attributes' => 'target="_blank"'],
+                        ],
+                    ],
 					[
 						'label' => 'Разработка',
 						'icon'  => 'fas fa-code',
