@@ -34,20 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\ActionColumn',
                 'header'=>'Действия',
                 'headerOptions' => ['width' => '80'],
-                'template' => '{view} {update} {delete} {link}',
+                'template' => '{view}',
                 'buttons' => [
                     'view' => function($url, $model) {
                         return Html::a(
                             '<i class="fa fa-eye text-primary"></i>',
                             $url);
-                    },
-                    'update' => function ($url, $model) {
-                        return Html::a(
-                            '<i class="fa fa-check text-success"></i>',
-                            $url);
-                    },
-                    'link' => function ($url, $model, $key) {
-                        return Html::a('<i class="fa fa-times text-danger"></i>', $url);
                     },
                 ],
             ],
