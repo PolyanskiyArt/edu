@@ -70,7 +70,7 @@ class PaymentController extends Controller
         $model = new Payment();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
+        
             $model->file = UploadedFile::getInstance($model, 'file');
             $model->filename = FileHelper::genImageName($model->course_group_id, $model->student_id, $model->file->extension);
             $model->save();
