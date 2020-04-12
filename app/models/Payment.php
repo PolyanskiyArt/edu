@@ -53,7 +53,7 @@ class Payment extends \yii\db\ActiveRecord
             [['filename'], 'string', 'max' => 250],
             [['approved_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['approved_by' => 'id']],
             [['student_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['student_id' => 'id']],
-            [['course_group_id'], 'exist', 'skipOnError' => true, 'targetClass' => CourseGroup::className(), 'targetAttribute' => ['id' => 'course_group_id']],
+//            [['course_group_id'], 'exist', 'skipOnError' => true, 'targetClass' => CourseGroup::className(), 'targetAttribute' => ['id' => 'course_group_id']],
         ];
     }
 
