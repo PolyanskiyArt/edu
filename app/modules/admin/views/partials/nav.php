@@ -39,6 +39,7 @@ use app\repository\CourseRepository;
 		</div>
 		<!-- Sidebar Menu -->
         <?php
+        // TODO это мракобесие следует перенести в контроллер, нужно найти где вызывается эта вьюшка и вынести туда инициализацию переменных
             $myCourses = (new CourseRepository())->getPayedByUserId(Yii::$app->user->id);
             $myCoursesItems = array_combine(array_column($myCourses, 'id'), array_column($myCourses,'name'));
             dump('Мои купленные курсы:');
