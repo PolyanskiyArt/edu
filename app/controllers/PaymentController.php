@@ -77,7 +77,7 @@ class PaymentController extends Controller
 
             if ($model->upload($model->filename)) {
                 Yii::$app->session->setFlash('success', 'Изображение загружено');
-                return $this->refresh();
+//                return $this->refresh();
             }
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -90,12 +90,6 @@ class PaymentController extends Controller
 
         return $this->render('create', $param );
 
-//        return $this->render('create', [
-//            'model' => $model,
-//            'sum' => $sum,
-//            'student_id' => $student_id,
-//            'course_group_id' => $course_group_id,
-//        ]);
     }
 
     /**
