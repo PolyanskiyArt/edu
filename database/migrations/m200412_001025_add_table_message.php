@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Class m200412_001025_add_table_personal_message
  */
-class m200412_001025_add_table_parsonal_message extends Migration
+class m200412_001025_add_table_message extends Migration
 {
     public $tableName = 'personal_message';
 
@@ -19,7 +19,7 @@ class m200412_001025_add_table_parsonal_message extends Migration
             'is_new'            => $this->boolean()->notNull(),
             'important_state'   => $this->smallInteger()->notNull()->defaultValue(1),
             'created_at'        => $this->integer()->notNull(),
-        ], $this->createTableOptions());
+        ]);
 	}
 
 	public function safeDown()
