@@ -5,7 +5,23 @@ use yii\helpers\Html;
 /* @var $this \yii\web\View */
 /* @var $content string */
 ?>
-
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    window.onload = function () {
+        var messages = new Vue({
+            el: '#messages',
+            data: {
+                MessagesCount: 3
+            }
+        });
+        var notifications = new Vue({
+            el: '#notifications',
+            data: {
+                NotificationsCount: 15
+            }
+        })
+    }
+</script>
 <header class="main-header">
 	<nav class="navbar navbar-expand navbar-white navbar-light border-bottom">
 		<!-- Left navbar links -->
@@ -21,7 +37,7 @@ use yii\helpers\Html;
 			<li class="nav-item dropdown">
 				<a class="nav-link" data-toggle="dropdown" href="#">
 					<i class="far fa-comments"></i>
-					<span class="badge badge-danger navbar-badge">3</span>
+					<span id='messages' class="badge badge-danger navbar-badge">{{ MessagesCount }}</span>
 				</a>
 				<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 					<a href="#" class="dropdown-item">
@@ -79,7 +95,7 @@ use yii\helpers\Html;
 			<li class="nav-item dropdown">
 				<a class="nav-link" data-toggle="dropdown" href="#">
 					<i class="far fa-bell"></i>
-					<span class="badge badge-warning navbar-badge">15</span>
+					<span id='notifications' class="badge badge-warning navbar-badge">{{ NotificationsCount }}</span>
 				</a>
 				<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 					<span class="dropdown-item dropdown-header">15 Notifications</span>
