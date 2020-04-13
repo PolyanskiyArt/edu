@@ -41,10 +41,10 @@ class PersonalMessage extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'from_user_id' => 'От',
-            'to_user_id' => 'К',
+            'from_user_id' => 'От кого',
+            'to_user_id' => 'Кому',
             'text' => 'Текст',
-            'is_new' => 'Не прочитано',
+            'is_new' => 'Новое',
             'important_state' => 'Важность',
             'created_at' => 'Время создания'
         ];
