@@ -72,6 +72,11 @@ use app\repository\CourseRepository;
 						'url'    => ['/admin/payments'],
 					],
 					[
+						'label'  => 'Сообщения',
+						'icon'   => 'far fa-comments',
+						'url'    => ['/admin/personal-messages'],
+					],
+					[
 						'label'  => 'Доступы',
 						'icon'   => 'fas fa-lock',
 						'url'    => ['/admin/rbac/permissions'],
