@@ -43,6 +43,8 @@ class PersonalMessage extends \yii\db\ActiveRecord
             'id' => 'ID',
             'from_user_id' => 'От кого',
             'to_user_id' => 'Кому',
+            'from_user' => 'от кого',
+            'to_user' => 'кому',
             'text' => 'Текст',
             'is_new' => 'Новое',
             'important_state' => 'Важность',
@@ -56,6 +58,11 @@ class PersonalMessage extends \yii\db\ActiveRecord
     public function getFromUser()
     {
         return $this->hasOne(User::className(), ['id' => 'from_user_id']);
+    }
+
+    public function getUserName()
+    {
+        return $this->user->username;
     }
 
     /**

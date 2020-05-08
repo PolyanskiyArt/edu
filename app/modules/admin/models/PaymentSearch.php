@@ -78,11 +78,6 @@ class PaymentSearch extends Payment
 			'approved_at' => $this->approved_at,
 		]);
 
-//		$query->andFilterWhere(['like', 'username', $this->username])
-//			->andFilterWhere(['like', 'email', $this->email])
-//			->andFilterWhere(['like', 'concat(first_name, " " , last_name) ', $this->full_name]);
-
-
 		return $dataProvider;
 	}
 }

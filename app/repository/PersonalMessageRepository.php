@@ -3,28 +3,17 @@
 namespace app\repository;
 
 use app\models\PersonalMessage;
+use yii\db\ActiveQuery;
 
-/**
- * CourseGroupRepository represents the model behind the search form of `app\models\Course`.
- */
 class PersonalMessageRepository
 {
     /**
-     * @param int $userId идентификатор студента
-     * @return array массив параметров курсов
+     * @return ActiveQuery
      * @throws
      */
-    public function findListLastMessages(): array
+    public function findListLastMessages(): ActiveQuery
     {
-//        return \Yii::$app->db->createCommand(
-//            'SELECT * FROM course where id in
-//                    (SELECT course_id from course_group where id in
-//                    (select course_group_id from payment where approved_by is not null and student_id = :id))'
-//        )->bindParam(':id', $userId)->queryAll();
-//
-        $createdAt = '(SELECT MAX(created_at) FROM personal_message WHERE p.from_user_id=from_user_id AND p.to_user_id=to_user_id)';
-
-        return PersonalMessage::findAll(['created_at' => $createdAt]);
-
+        return PersonalMessage::findBySql('SELECT p.* FROM personal_message p WHERE p.created_at = ' .
+            '(SELECT MAX(m.created_at) FROM personal_message m WHERE m.from_user_id = p.from_user_id)');
     }
 }
