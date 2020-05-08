@@ -40,7 +40,7 @@ class PaymentSearch extends Payment
      */
     public function search($params)
     {
-        $query = Payment::find();
+        $query = Payment::find(); // ActiveQuery
 
         // add conditions that should always apply here
 
