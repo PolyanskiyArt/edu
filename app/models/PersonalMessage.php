@@ -62,7 +62,7 @@ class PersonalMessage extends \yii\db\ActiveRecord
 
     public function getUserName()
     {
-        return $this->user->username;
+        return $this->user->username ?? 'noname (' . $this->user->id . ')';
     }
 
     /**

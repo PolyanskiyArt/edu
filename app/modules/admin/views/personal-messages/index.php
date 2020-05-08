@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use app\modules\admin\widgets\BoxGridView;
 use app\modules\admin\Module as AdminModule;
 use yii\grid\GridView;
+use yii\helpers\StringHelper;
 
 /* @var $this yii\web\View */
 $this->title = 'Сообщения';
@@ -20,6 +21,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
 //        'layout'=>"{pager}\n{summary}\n{items}",
+        'rowOptions' => function ($model, $key, $index, $grid)
+        {
+            if($model['is_new'] == 1) {
+//                return ['style' => 'background-color:#778899; color: maroon;'];
+                return ['style' => 'font-weight: 600;'];
+            }
+        },
+
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
@@ -31,29 +40,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'от кого',
 
             ],
-//            [
-//                'attribute' => 'from_user',
-////                'label' => 'от кого',
-//                'content' => function ($data) {
-//                    return $data['from_user'] ?? '-- noname -- (' . $data['from_user_id'] . ')';
-//                }
-//            ],
             [
-                'attribute' => 'to_user',
-//                'label' => 'кому',
-'filter' => \yii\helpers\ArrayHelper::map(\app\models\User::find()->all(), 'id', 'username'),
-//                'filter' => $this->to_user,
-
+                'attribute' => 'text',
+                'value' => function ($model) {
+                    return StringHelper::truncate($model['text'], 40);
+                }
             ],
-//            'from_user',
-//            'to_user',
-            'text:ntext',
-            'is_new',
+//            'is_new',
             'important_state',
-//            [
-//                'attribute' => 'created_at',
-//                'format' => ['date', 'HH:mm:ss dd.MM.YYYY'],
-//            ],
             'created_at',
             ['class' => 'yii\grid\ActionColumn'],
         ],
