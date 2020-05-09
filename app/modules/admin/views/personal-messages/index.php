@@ -15,8 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php $this->beginBlock('content-title'); ?>
 <?php $this->endBlock(); ?>
 
+
 <div class="payment-index">
 
+    <?= $this->render('_search', ['model' => $searchModel]) ?>
     <?= BoxGridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -37,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'fromUser',
-                'label' => 'от кого',
+                'label' => 'User',
 
             ],
             [
