@@ -4,10 +4,8 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\PersonalMessage;
 use yii\data\SqlDataProvider;
 use Yii;
-use yii\db\Query;
 
 /**
  * PaymentSearch represents the model behind the search form of `app\models\Payment`.
@@ -93,7 +91,7 @@ class PersonalMessageSearch extends PersonalMessage
             ') AS a ' .
             'INNER JOIN personal_message p ON a.maxid = id ' .
             'LEFT JOIN user u ON a.user=u.id ' .
-            'WHERE 1=1' ;
+            'WHERE 1=1';
 
         $queryCount = 'SELECT count(p.id) FROM (' .
             'SELECT MAX(id) AS maxid, IF (from_user_id = :me_id, to_user_id, from_user_id) AS user ' .
@@ -103,9 +101,9 @@ class PersonalMessageSearch extends PersonalMessage
             ') AS a ' .
             'INNER JOIN personal_message p ON a.maxid = id ' .
             'LEFT JOIN user u ON a.user=u.id ' .
-            'WHERE 1=1' ;
+            'WHERE 1=1';
 
-        $count = (int)Yii::$app->db->createCommand($queryCount, $queryParams)->queryScalar();
+        $count = (int) Yii::$app->db->createCommand($queryCount, $queryParams)->queryScalar();
 
         $dataProvider = new SqlDataProvider([
             'sql' => $sql,
@@ -152,8 +150,7 @@ class PersonalMessageSearch extends PersonalMessage
             $queryCount .= ' AND text like :text';
         }
 
-        $count = (int)Yii::$app->db->createCommand($queryCount, $queryParams)->queryScalar();
-
+        $count = (int) Yii::$app->db->createCommand($queryCount, $queryParams)->queryScalar();
 
         $dataProvider->totalCount = $count;
         $dataProvider->params = $queryParams;
