@@ -81,28 +81,31 @@ class PersonalMessageSearch extends PersonalMessage
      */
     public function search($params)
     {
-//        $sql = 'SELECT p.* FROM personal_message p WHERE p.created_at = ' .
-//            '(SELECT MAX(m.created_at) FROM personal_message m WHERE m.from_user_id = p.from_user_id)';
+        $me_id = Yii::$app->user->id;
 
-        $sql = 'SELECT p.*, u.username as fromUser, u1.username as to_user FROM personal_message p ' .
-            'LEFT JOIN user u ON p.from_user_id=u.id ' .
-            'LEFT JOIN user u1 ON p.to_user_id=u1.id ' .
-            'WHERE p.created_at = (SELECT MAX(m.created_at) FROM personal_message m WHERE m.from_user_id = p.from_user_id)';
+        $queryParams[':me_id'] = $me_id;
 
-//        $query = Yii::$app->db->createCommand($sql)->query();
-        $query = (new Query())->select('*')
-            ->from('personal_message');
+        $sql = 'SELECT u.username as fromUser,  p.* FROM (' .
+            'SELECT MAX(id) AS maxid, IF (from_user_id = :me_id, to_user_id, from_user_id) AS user ' .
+            'FROM personal_message ' .
+            'WHERE from_user_id = :me_id or to_user_id = :me_id ' .
+            'GROUP BY user' .
+            ') AS a ' .
+            'INNER JOIN personal_message p ON a.maxid = id ' .
+            'LEFT JOIN user u ON a.user=u.id ' .
+            'WHERE 1=1' ;
 
+        $queryCount = 'SELECT count(p.id) FROM (' .
+            'SELECT MAX(id) AS maxid, IF (from_user_id = :me_id, to_user_id, from_user_id) AS user ' .
+            'FROM personal_message ' .
+            'WHERE from_user_id = :me_id or to_user_id = :me_id ' .
+            'GROUP BY user' .
+            ') AS a ' .
+            'INNER JOIN personal_message p ON a.maxid = id ' .
+            'LEFT JOIN user u ON a.user=u.id ' .
+            'WHERE 1=1' ;
 
-        $queryCount = 'SELECT count(id) FROM personal_message WHERE id in (SELECT p.id FROM personal_message p ' .
-            'JOIN user u ON p.from_user_id=u.id ' .
-            'JOIN user u1 ON p.to_user_id=u1.id ' .
-            'WHERE p.created_at = (SELECT MAX(m.created_at) FROM personal_message m WHERE m.from_user_id = p.from_user_id))';
-
-//            'SELECT count(p.id) FROM personal_message p WHERE p.created_at = ' .
-//            '(SELECT MAX(m.created_at) FROM personal_message m WHERE m.from_user_id = p.from_user_id)';
-
-        $count = Yii::$app->db->createCommand($queryCount)->queryScalar();
+        $count = (int)Yii::$app->db->createCommand($queryCount, $queryParams)->queryScalar();
 
         $dataProvider = new SqlDataProvider([
             'sql' => $sql,
@@ -126,28 +129,23 @@ class PersonalMessageSearch extends PersonalMessage
         ]);
 
         if (!($this->load($params) && $this->validate())) {
+            $dataProvider->params = $queryParams;
             return $dataProvider;
         }
 
-//        dump($this);
-//        die();
         // grid filtering conditions
         if ($this->fromUser !== '') {
             $dataProvider->sql .= ' AND u.username like :fromUser';
             $queryParams[':fromUser'] = '%' . $this->fromUser . '%';
-//            $queryCount .= ' AND fromUser like :fromUser';
-            $queryCount = 'SELECT count(id) FROM personal_message WHERE id in (SELECT p.id FROM personal_message p ' .
-                'JOIN user u ON p.from_user_id=u.id ' .
-                'JOIN user u1 ON p.to_user_id=u1.id ' .
-                'WHERE p.created_at = (SELECT MAX(m.created_at) FROM personal_message m WHERE m.from_user_id = p.from_user_id) AND u.username like :fromUser);';
+            $queryCount .= ' AND u.username like :fromUser';
         }
-//
-//        if ($this->toUser !== '') {
-//            $dataProvider->sql .= ' AND toUser like :toUser';
-//            $queryParams[':toUser'] = $this->toUser;
-//            $queryCount .= ' AND toUser like :toUser';
-//        }
-//
+
+        if ($this->is_new !== '') {
+            $dataProvider->sql .= ' AND is_new=:is_new';
+            $queryParams[':is_new'] = $this->is_new;
+            $queryCount .= ' AND is_new=:is_new';
+        }
+
         if ($this->text !== '') {
             $dataProvider->sql .= ' AND text like :text';
             $queryParams[':text'] = '%' . $this->text . '%';
@@ -155,6 +153,7 @@ class PersonalMessageSearch extends PersonalMessage
         }
 
         $count = (int)Yii::$app->db->createCommand($queryCount, $queryParams)->queryScalar();
+
 
         $dataProvider->totalCount = $count;
         $dataProvider->params = $queryParams;
