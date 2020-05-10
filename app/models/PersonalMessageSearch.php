@@ -44,28 +44,52 @@ class PersonalMessageSearch extends PersonalMessage
      *
      * @return ActiveDataProvider
      */
-    public function search1($query)
+    public function search1($params)
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-            'sort' => ['defaultOrder' => ['created_at' => SORT_ASC]],
+        $me_id = Yii::$app->user->id;
+
+        $queryParams[':id_user'] = $params['id'];
+
+        $sql = 'SELECT p.* FROM personal_message p WHERE p.from_user_id=:id_user OR p.to_user_id=:id_user ORDER BY created_at DESC';
+
+        $queryCount = 'SELECT count(p.id) FROM personal_message p WHERE p.from_user_id=:id_user OR p.to_user_id=:id_user';
+
+        $count = (int)Yii::$app->db->createCommand($queryCount, $queryParams)->queryScalar();
+
+        $dataProvider = new SqlDataProvider([
+            'sql' => $sql,
+            'totalCount' => (int)$count, //$queryCount,
+            'sort' => [
+                'attributes' => [
+                    'from_user',
+                    'to_user',
+                    'is_new',
+                    'important_state',
+                    'text',
+                    'created_at',
+                ],
+            ],
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
 
-        $this->load($query->all());
-
-        if (!$this->validate()) {
+        if (!($this->load($params) && $this->validate())) {
+            $dataProvider->params = $queryParams;
             return $dataProvider;
         }
 
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'from_user_id' => $this->from_user_id,
-            'to_user_id' => $this->to_user_id,
-            'is_new' => $this->is_new,
-            'important_state' => $this->important_state,
-            'text' => $this->text,
-            'created_at' => $this->created_at,
-        ]);
+        // grid filtering conditions
+        if ($this->text !== '') {
+            $dataProvider->sql = 'SELECT p.* FROM personal_message p WHERE (p.from_user_id=:id_user OR p.to_user_id=:id_user) AND text like :text ORDER BY created_at DESC';
+            $queryParams[':text'] = '%' . $this->text . '%';
+            $queryCount = 'SELECT count(p.id) FROM personal_message p WHERE (p.from_user_id=:id_user OR p.to_user_id=:id_user) AND text like :text';
+        }
+
+        $count = (int)Yii::$app->db->createCommand($queryCount, $queryParams)->queryScalar();
+
+        $dataProvider->totalCount = $count;
+        $dataProvider->params = $queryParams;
 
         return $dataProvider;
     }
@@ -83,7 +107,7 @@ class PersonalMessageSearch extends PersonalMessage
 
         $queryParams[':me_id'] = $me_id;
 
-        $sql = 'SELECT u.username as fromUser,  p.* FROM (' .
+        $sql = 'SELECT u.username as fromUser,  a.user, p.* FROM (' .
             'SELECT MAX(id) AS maxid, IF (from_user_id = :me_id, to_user_id, from_user_id) AS user ' .
             'FROM personal_message ' .
             'WHERE from_user_id = :me_id or to_user_id = :me_id ' .
@@ -103,7 +127,7 @@ class PersonalMessageSearch extends PersonalMessage
             'LEFT JOIN user u ON a.user=u.id ' .
             'WHERE 1=1';
 
-        $count = (int) Yii::$app->db->createCommand($queryCount, $queryParams)->queryScalar();
+        $count = (int)Yii::$app->db->createCommand($queryCount, $queryParams)->queryScalar();
 
         $dataProvider = new SqlDataProvider([
             'sql' => $sql,
@@ -138,7 +162,7 @@ class PersonalMessageSearch extends PersonalMessage
             $queryCount .= ' AND u.username like :fromUser';
         }
 
-        if ($this->is_new !== '') {
+        if ($this->is_new) {
             $dataProvider->sql .= ' AND is_new=:is_new';
             $queryParams[':is_new'] = $this->is_new;
             $queryCount .= ' AND is_new=:is_new';
@@ -150,7 +174,7 @@ class PersonalMessageSearch extends PersonalMessage
             $queryCount .= ' AND text like :text';
         }
 
-        $count = (int) Yii::$app->db->createCommand($queryCount, $queryParams)->queryScalar();
+        $count = (int)Yii::$app->db->createCommand($queryCount, $queryParams)->queryScalar();
 
         $dataProvider->totalCount = $count;
         $dataProvider->params = $queryParams;
