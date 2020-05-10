@@ -26,11 +26,10 @@ class PersonalMessage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['from_user_id', 'to_user_id', 'important_state'], 'required'],
-            [['description'], 'string'],
+            [['from_user_id', 'to_user_id'], 'required'],
             [['from_user_id', 'to_user_id', 'important_state'], 'integer'],
             [['text'], 'string', 'max' => 150],
-            ['status', 'in', 'range' => array_keys(ImportantMessageValueObject::STATE)],
+//            ['status', 'in', 'range' => array_keys(ImportantMessageValueObject::STATE)],
             [['from_user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['from_user_id' => 'id']],
             [['to_user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['to_user_id' => 'id']],
 
