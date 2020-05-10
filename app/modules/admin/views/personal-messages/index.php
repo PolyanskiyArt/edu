@@ -56,3 +56,6 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
 </div>
+
+<?= $this->render('_create', ['model' => $model]) ?>
+
