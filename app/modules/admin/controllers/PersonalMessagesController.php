@@ -77,7 +77,7 @@ class PersonalMessagesController extends \yii\web\Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model['from_user_id'] = $id;
-            $result = $model->save();
+            $result = $model->save(true);
         }
 
         // перейти на предыдущую страницу (index or list)
