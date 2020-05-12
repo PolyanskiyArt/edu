@@ -26,9 +26,9 @@
                     });
                 },
                 updateData() {
-                    this.polling = setInterval(() => {
+                    this.polling = setInterval( () => {
                             this.getData();
-                }, 5000);
+                }, <?= \app\api\Messages::DELAY_UPDATE ?>);
                 },
                 go(id){
                     window.location = "<?= Yii::$app->urlManager->createUrl('admin/personal-messages/list?id=');?>"+id;

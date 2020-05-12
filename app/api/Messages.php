@@ -29,6 +29,8 @@ class Messages extends PersonalMessage
         "text-danger",
     ];
 
+    const DELAY_UPDATE = 5000;
+
     public static function getLastMessages() : array
     {
 
