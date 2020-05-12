@@ -25,11 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
 //        'layout'=>"{pager}\n{summary}\n{items}",
         'rowOptions' => function ($model, $key, $index, $grid) {
             $ret ['user'] = $model['user'];
-//            $ret ['onclick'] = 'alert("Row clicked. user_id=' . $ret ['user'] . '")';
             $a = Yii::$app->urlManager->createUrl('admin/personal-messages/list');
             $ret ['onclick'] = "location.href='" . $a  . "?id=" . $ret ['user'] . "'";
             if ($model['is_new'] == 1) {
-//                return ['style' => 'background-color:#778899; color: maroon;'];
                 $ret ['style'] = 'font-weight: 600;';
             }
             return $ret;
