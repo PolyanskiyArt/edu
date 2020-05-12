@@ -8,6 +8,7 @@
   "prefer-stable": true,
   "require": {
     "php": ">=7.0",
+    "aki/yii2-vue": "^0.6.2",
     "almasaeed2010/adminlte": "v3.0.0-beta.1",
     "justcoded/dotenv-sync": "*",
     "justcoded/yii2-rbac": "*",

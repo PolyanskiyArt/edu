@@ -71,4 +71,5 @@ class PersonalMessage extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'to_user_id']);
     }
+
 }

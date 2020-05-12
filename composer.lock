@@ -4,8 +4,55 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "980c09c9135a66a864a16945234b60db",
+    "content-hash": "6b6598b1446e3b6b85d73ad42e5cc241",
     "packages": [
+        {
+            "name": "aki/yii2-vue",
+            "version": "0.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/akbarjoudi/yii2-vue.git",
+                "reference": "c7b1f8f8d67965a5410a5d51858ce6ddb5544dfc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/akbarjoudi/yii2-vue/zipball/c7b1f8f8d67965a5410a5d51858ce6ddb5544dfc",
+                "reference": "c7b1f8f8d67965a5410a5d51858ce6ddb5544dfc",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/axios": "*",
+                "bower-asset/vue": "*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "aki\\vue\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "akbar joudi",
+                    "email": "akbar.joody@gmail.com"
+                }
+            ],
+            "description": "for yii2 web application ",
+            "keywords": [
+                " akbar-joudi",
+                " vue.js",
+                " vuejs",
+                " yii2",
+                " yii2-vue",
+                "vue",
+                "yii2"
+            ],
+            "time": "2020-03-21T10:33:01+00:00"
+        },
         {
             "name": "almasaeed2010/adminlte",
             "version": "v3.0.0-beta.1",
@@ -46,11 +93,29 @@
             "time": "2019-06-24T10:58:44+00:00"
         },
         {
+            "name": "bower-asset/axios",
+            "version": "v0.19.2",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:mzabriskie/axios.git",
+                "reference": "2a0ff479f9fb7f09a219f5178ca85a6519562ff1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mzabriskie/axios/zipball/2a0ff479f9fb7f09a219f5178ca85a6519562ff1",
+                "reference": "2a0ff479f9fb7f09a219f5178ca85a6519562ff1"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
             "name": "bower-asset/inputmask",
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "git@github.com:RobinHerbots/Inputmask.git",
+                "url": "https://github.com/RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -110,13 +175,28 @@
             "version": "v1.3.2",
             "source": {
                 "type": "git",
-                "url": "git@github.com:bestiejs/punycode.js.git",
+                "url": "https://github.com/bestiejs/punycode.js.git",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/bestiejs/punycode.js/zipball/38c8d3131a82567bfef18da09f7f4db68c84f8a3",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
+            },
+            "type": "bower-asset"
+        },
+        {
+            "name": "bower-asset/vue",
+            "version": "v2.6.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vuejs/vue.git",
+                "reference": "ec78fc8b6d03e59da669be1adf4b4b5abf670a34"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vuejs/vue/zipball/ec78fc8b6d03e59da669be1adf4b4b5abf670a34",
+                "reference": "ec78fc8b6d03e59da669be1adf4b4b5abf670a34"
             },
             "type": "bower-asset"
         },
@@ -1245,7 +1325,7 @@
             "version": "v3.4.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/twbs/bootstrap.git",
+                "url": "git@github.com:twbs/bootstrap.git",
                 "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
             },
             "dist": {
@@ -1367,6 +1447,7 @@
                 "functional testing",
                 "unit testing"
             ],
+            "abandoned": true,
             "time": "2019-04-24T11:36:34+00:00"
         },
         {
@@ -4434,5 +4515,6 @@
     "platform": {
         "php": ">=7.0"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }
