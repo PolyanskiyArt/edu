@@ -16,11 +16,11 @@ class PersonalMessagesController extends \yii\web\Controller
 
         $queryParams = Yii::$app->request->queryParams;
         $dataProvider = $searchModel->search($queryParams);
-        
+
         $dataProvider->setSort([
             'attributes' => [
                 'fromUser' => [
-                    'label'=> 'вид кого',
+                    'label' => 'вид кого',
                 ],
                 'from_user',
                 'to_user',
@@ -34,7 +34,40 @@ class PersonalMessagesController extends \yii\web\Controller
             ],
         ]);
 
-        return $this->render('index', compact('searchModel', 'dataProvider','model'));
+        return $this->render('index', compact('searchModel', 'dataProvider', 'model'));
+    }
+
+    public function actionList()
+    {
+        $searchModel = new PersonalMessageSearch();
+        $model = new PersonalMessage();
+
+        $queryParams = Yii::$app->request->queryParams;
+
+        // вся переписка с этим Пользователем Прочитана
+        $id = $queryParams['id'];
+        PersonalMessage::updateAll(['is_new' => 0], ['OR', ['from_user_id' => $id], ['to_user_id' => $id]]);
+
+        $dataProvider = $searchModel->search1($queryParams);
+
+        $dataProvider->setSort([
+            'attributes' => [
+                'fromUser' => [
+                    'label' => 'вид кого',
+                ],
+                'from_user',
+                'to_user',
+                'text',
+                'is_new',
+                'important_state',
+                'created_at' => [
+                    'default' => SORT_ASC,
+                ],
+                'created_at',
+            ],
+        ]);
+
+        return $this->render('list', compact('searchModel', 'dataProvider', 'model'));
     }
 
     public function actionCreate()
@@ -44,15 +77,10 @@ class PersonalMessagesController extends \yii\web\Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model['from_user_id'] = $id;
-            $model['created_at'] = date('Y-m-d h:i:s');
             $result = $model->save();
-//            dump($model);
-//            dump($result);
-//            die;
-
-            return $this->redirect(['index']);
         }
 
-        return $this->redirect(['index']);
+        // перейти на предыдущую страницу (index or list)
+        $this->redirect(Yii::$app->request->referrer);
     }
 }
