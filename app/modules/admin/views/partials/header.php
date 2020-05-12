@@ -18,7 +18,7 @@
             methods: {
                 getData(){
                     axios
-                        .get('http://ed.loc/public/api/get')
+                        .get("<?= Yii::$app->urlManager->createUrl('api/get');?>")
                         .then(response => (this.MessagesCount = response.data.cnt, this.Messages = response.data.list))
                         .catch(function (e) {
                             this.error = e;
