@@ -21,6 +21,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= BoxGridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions' => function ($model, $key, $index, $grid) {
+            $url = Yii::$app->urlManager->createUrl('admin/payments/view?id=' . $model['id']);
+            $ret ['onclick'] = "location.href='" . $url  . "'";
+            return $ret;
+        },
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'], // номер по порядку
             'student_id',
@@ -29,20 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'course_group_id',
             'approved_at',
             'approved_by',
-//            'filename',
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'header'=>'Действия',
-                'headerOptions' => ['width' => '80'],
-                'template' => '{view}',
-                'buttons' => [
-                    'view' => function($url, $model) {
-                        return Html::a(
-                            '<i class="fa fa-eye text-primary"></i>',
-                            $url);
-                    },
-                ],
-            ],
+
         ],
     ]); ?>
 
