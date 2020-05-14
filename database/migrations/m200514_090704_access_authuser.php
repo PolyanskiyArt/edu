@@ -9,19 +9,21 @@ class m200514_090704_access_authuser extends Migration
 {
 
     public $table = 'auth_item_child';
+    const ITEMS =
+        [
+            'admin/personal-messages/index',
+            'admin/personal-messages/list',
+            'admin/users/update',
+            'api/get',
+
+        ];
 
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $ar = array();
-        $ar[] = 'admin/personal-messages/index';
-        $ar[] = 'admin/personal-messages/list';
-        $ar[] = 'admin/users/update';
-        $ar[] = 'api/get';
-
-        foreach ($ar as $v) {
+        foreach ($this::ITEMS as $v) {
             $this->db->createCommand()->upsert($this->table, ['parent' => 'Authenticated', 'child' => $v])->execute();
         }
     }
