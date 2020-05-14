@@ -4,55 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6b6598b1446e3b6b85d73ad42e5cc241",
+    "content-hash": "b9d29a7ce1430c4cd0a7b3a60af198cf",
     "packages": [
-        {
-            "name": "aki/yii2-vue",
-            "version": "0.6.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/akbarjoudi/yii2-vue.git",
-                "reference": "c7b1f8f8d67965a5410a5d51858ce6ddb5544dfc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/akbarjoudi/yii2-vue/zipball/c7b1f8f8d67965a5410a5d51858ce6ddb5544dfc",
-                "reference": "c7b1f8f8d67965a5410a5d51858ce6ddb5544dfc",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/axios": "*",
-                "bower-asset/vue": "*",
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "aki\\vue\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0+"
-            ],
-            "authors": [
-                {
-                    "name": "akbar joudi",
-                    "email": "akbar.joody@gmail.com"
-                }
-            ],
-            "description": "for yii2 web application ",
-            "keywords": [
-                " akbar-joudi",
-                " vue.js",
-                " vuejs",
-                " yii2",
-                " yii2-vue",
-                "vue",
-                "yii2"
-            ],
-            "time": "2020-03-21T10:33:01+00:00"
-        },
         {
             "name": "almasaeed2010/adminlte",
             "version": "v3.0.0-beta.1",
@@ -91,24 +44,6 @@
                 "web"
             ],
             "time": "2019-06-24T10:58:44+00:00"
-        },
-        {
-            "name": "bower-asset/axios",
-            "version": "v0.19.2",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:mzabriskie/axios.git",
-                "reference": "2a0ff479f9fb7f09a219f5178ca85a6519562ff1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mzabriskie/axios/zipball/2a0ff479f9fb7f09a219f5178ca85a6519562ff1",
-                "reference": "2a0ff479f9fb7f09a219f5178ca85a6519562ff1"
-            },
-            "type": "bower-asset",
-            "license": [
-                "MIT"
-            ]
         },
         {
             "name": "bower-asset/inputmask",
@@ -182,21 +117,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/bestiejs/punycode.js/zipball/38c8d3131a82567bfef18da09f7f4db68c84f8a3",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
-            },
-            "type": "bower-asset"
-        },
-        {
-            "name": "bower-asset/vue",
-            "version": "v2.6.11",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/vuejs/vue.git",
-                "reference": "ec78fc8b6d03e59da669be1adf4b4b5abf670a34"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/vuejs/vue/zipball/ec78fc8b6d03e59da669be1adf4b4b5abf670a34",
-                "reference": "ec78fc8b6d03e59da669be1adf4b4b5abf670a34"
             },
             "type": "bower-asset"
         },
@@ -1262,6 +1182,53 @@
     ],
     "packages-dev": [
         {
+            "name": "aki/yii2-vue",
+            "version": "0.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/akbarjoudi/yii2-vue.git",
+                "reference": "c7b1f8f8d67965a5410a5d51858ce6ddb5544dfc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/akbarjoudi/yii2-vue/zipball/c7b1f8f8d67965a5410a5d51858ce6ddb5544dfc",
+                "reference": "c7b1f8f8d67965a5410a5d51858ce6ddb5544dfc",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/axios": "*",
+                "bower-asset/vue": "*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "aki\\vue\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "akbar joudi",
+                    "email": "akbar.joody@gmail.com"
+                }
+            ],
+            "description": "for yii2 web application ",
+            "keywords": [
+                " akbar-joudi",
+                " vue.js",
+                " vuejs",
+                " yii2",
+                " yii2-vue",
+                "vue",
+                "yii2"
+            ],
+            "time": "2020-03-21T10:33:01+00:00"
+        },
+        {
             "name": "behat/gherkin",
             "version": "v4.6.0",
             "source": {
@@ -1321,11 +1288,29 @@
             "time": "2019-01-16T14:22:17+00:00"
         },
         {
+            "name": "bower-asset/axios",
+            "version": "v0.19.2",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:mzabriskie/axios.git",
+                "reference": "2a0ff479f9fb7f09a219f5178ca85a6519562ff1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mzabriskie/axios/zipball/2a0ff479f9fb7f09a219f5178ca85a6519562ff1",
+                "reference": "2a0ff479f9fb7f09a219f5178ca85a6519562ff1"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
             "name": "bower-asset/bootstrap",
             "version": "v3.4.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:twbs/bootstrap.git",
+                "url": "https://github.com/twbs/bootstrap.git",
                 "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
             },
             "dist": {
@@ -1356,6 +1341,21 @@
             },
             "require": {
                 "bower-asset/jquery": ">=1.7"
+            },
+            "type": "bower-asset"
+        },
+        {
+            "name": "bower-asset/vue",
+            "version": "v2.6.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vuejs/vue.git",
+                "reference": "ec78fc8b6d03e59da669be1adf4b4b5abf670a34"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vuejs/vue/zipball/ec78fc8b6d03e59da669be1adf4b4b5abf670a34",
+                "reference": "ec78fc8b6d03e59da669be1adf4b4b5abf670a34"
             },
             "type": "bower-asset"
         },
@@ -1449,6 +1449,142 @@
             ],
             "abandoned": true,
             "time": "2019-04-24T11:36:34+00:00"
+        },
+        {
+            "name": "codeception/codeception",
+            "version": "4.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Codeception/Codeception.git",
+                "reference": "55d8d1d882fa0777e47de17b04c29b3c50fe29e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/55d8d1d882fa0777e47de17b04c29b3c50fe29e7",
+                "reference": "55d8d1d882fa0777e47de17b04c29b3c50fe29e7",
+                "shasum": ""
+            },
+            "require": {
+                "behat/gherkin": "^4.4.0",
+                "codeception/lib-asserts": "^1.0",
+                "codeception/phpunit-wrapper": ">6.0.15 <6.1.0 | ^6.6.1 | ^7.7.1 | ^8.1.1 | ^9.0",
+                "codeception/stub": "^2.0 | ^3.0",
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "guzzlehttp/psr7": "~1.4",
+                "php": ">=5.6.0 <8.0",
+                "symfony/console": ">=2.7 <6.0",
+                "symfony/css-selector": ">=2.7 <6.0",
+                "symfony/event-dispatcher": ">=2.7 <6.0",
+                "symfony/finder": ">=2.7 <6.0",
+                "symfony/yaml": ">=2.7 <6.0"
+            },
+            "require-dev": {
+                "codeception/module-asserts": "*@dev",
+                "codeception/module-cli": "*@dev",
+                "codeception/module-db": "*@dev",
+                "codeception/module-filesystem": "*@dev",
+                "codeception/module-phpbrowser": "*@dev",
+                "codeception/specify": "~0.3",
+                "codeception/util-universalframework": "*@dev",
+                "monolog/monolog": "~1.8",
+                "squizlabs/php_codesniffer": "~2.0",
+                "symfony/process": ">=2.7 <6.0",
+                "vlucas/phpdotenv": "^2.0 | ^3.0 | ^4.0"
+            },
+            "suggest": {
+                "codeception/specify": "BDD-style code blocks",
+                "codeception/verify": "BDD-style assertions",
+                "hoa/console": "For interactive console functionality",
+                "stecman/symfony-console-completion": "For BASH autocompletion",
+                "symfony/phpunit-bridge": "For phpunit-bridge support"
+            },
+            "bin": [
+                "codecept"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": []
+            },
+            "autoload": {
+                "psr-4": {
+                    "Codeception\\": "src/Codeception",
+                    "Codeception\\Extension\\": "ext"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Bodnarchuk",
+                    "email": "davert@mail.ua",
+                    "homepage": "http://codegyre.com"
+                }
+            ],
+            "description": "BDD-style testing framework",
+            "homepage": "http://codeception.com/",
+            "keywords": [
+                "BDD",
+                "TDD",
+                "acceptance testing",
+                "functional testing",
+                "unit testing"
+            ],
+            "funding": [
+                {
+                    "url": "https://opencollective.com/codeception",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2020-03-23T17:07:20+00:00"
+        },
+        {
+            "name": "codeception/lib-asserts",
+            "version": "1.12.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Codeception/lib-asserts.git",
+                "reference": "acd0dc8b394595a74b58dcc889f72569ff7d8e71"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Codeception/lib-asserts/zipball/acd0dc8b394595a74b58dcc889f72569ff7d8e71",
+                "reference": "acd0dc8b394595a74b58dcc889f72569ff7d8e71",
+                "shasum": ""
+            },
+            "require": {
+                "codeception/phpunit-wrapper": ">6.0.15 <6.1.0 | ^6.6.1 | ^7.7.1 | ^8.0.3 | ^9.0",
+                "php": ">=5.6.0 <8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Bodnarchuk",
+                    "email": "davert@mail.ua",
+                    "homepage": "http://codegyre.com"
+                },
+                {
+                    "name": "Gintautas Miselis"
+                }
+            ],
+            "description": "Assertion methods used by Codeception core and Asserts module",
+            "homepage": "http://codeception.com/",
+            "keywords": [
+                "codeception"
+            ],
+            "time": "2020-04-17T18:20:46+00:00"
         },
         {
             "name": "codeception/phpunit-wrapper",
@@ -1799,6 +1935,7 @@
                     "email": "jakub.onderka@gmail.com"
                 }
             ],
+            "abandoned": "php-parallel-lint/php-console-color",
             "time": "2018-09-29T17:23:10+00:00"
         },
         {
@@ -1845,6 +1982,7 @@
                 }
             ],
             "description": "Highlight PHP code in terminal",
+            "abandoned": "php-parallel-lint/php-console-highlighter",
             "time": "2018-09-29T18:48:56+00:00"
         },
         {
@@ -4357,6 +4495,52 @@
                 "yii2"
             ],
             "time": "2019-04-23T13:18:43+00:00"
+        },
+        {
+            "name": "yiisoft/yii2-codeception",
+            "version": "2.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-codeception.git",
+                "reference": "086c8c2d28736e7a484a7a8611b5cc84024e9fb3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-codeception/zipball/086c8c2d28736e7a484a7a8611b5cc84024e9fb3",
+                "reference": "086c8c2d28736e7a484a7a8611b5cc84024e9fb3",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": ">=2.0.4"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\codeception\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Jebri",
+                    "email": "mark.github@yandex.ru"
+                }
+            ],
+            "description": "The Codeception integration for the Yii framework",
+            "keywords": [
+                "codeception",
+                "yii2"
+            ],
+            "abandoned": "codeception/codeception",
+            "time": "2017-05-22T12:08:21+00:00"
         },
         {
             "name": "yiisoft/yii2-debug",

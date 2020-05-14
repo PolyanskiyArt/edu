@@ -12,17 +12,17 @@ return [
 		'class' => AccessControl::class,
 		'rules' => [
 			// custom rule to deny access to "/admin/*" if user doesn't have permission 'administer'.
-			[
-				'allow'   => false,
-				'controllers' => ['admin/*'],
-				'matchCallback' => function ($rule, $action) {
-					return ! \Yii::$app->user->can('administer');
-				},
-				'denyCallback' => function ($null, $action) {
-					\Yii::$app->errorHandler->errorAction = 'site/error';
-					throw new NotFoundHttpException('Page not found.');
-				}
-			],
+//			[ 
+//				'allow'   => false,
+//				'controllers' => ['admin/*'],
+//				'matchCallback' => function ($rule, $action) {
+//					return !\Yii::$app->user->can('administer');
+//				},
+//				'denyCallback' => function ($null, $action) {
+//					\Yii::$app->errorHandler->errorAction = 'site/error';
+//					throw new NotFoundHttpException('Page not found.');
+//				}
+//			],
 			// this one is required to make all other site works.
 			[
 				'allow' => true,
