@@ -33,7 +33,7 @@ use yii\helpers\Html;
         <?php
         if (\Yii::$app->user->can('administer')) {
             echo $form->field($model, 'status')->dropDownList(User::getStatusesList());
-            echo $form->field($model, 'roles')->dropDownList(User::getRolesList(), ['multiple' => 'multiple',]); 
+            echo $form->field($model, 'roles')->dropDownList(User::getRolesList(), ['multiple' => 'multiple',]);
         }
         ?>
     </div>
