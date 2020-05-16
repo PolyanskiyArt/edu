@@ -83,8 +83,8 @@ class Nav extends \yii\db\ActiveRecord
                     'items' => $subitems,
                 ];
                 if ($aRowMenu['parent_id'] !== 0) {
-                    $curMenu =& $aMenu[$aRowMenu['parent_id']];
-                    $items =& $curMenu['items'];
+                    $curMenu = &$aMenu[$aRowMenu['parent_id']];
+                    $items = &$curMenu['items'];
                     $items[] = $tmpMenu;
                 } else {
                     $aMenu[$aRowMenu['id']] = $tmpMenu;
