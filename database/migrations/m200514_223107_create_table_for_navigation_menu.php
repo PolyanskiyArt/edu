@@ -25,7 +25,7 @@ class m200514_223107_create_table_for_navigation_menu extends Migration
             'label' => $this->string()->notNull(),
             'icon' => $this->string(),
             'url' => $this->string()->defaultValue('#'),
-            'active' => $this->string(), // 'permissions' === Yii::$app->controller->id,
+            'subitems' => $this->string(), // 'permissions' === Yii::$app->controller->id,
         ],
             $tableOptions);
 
@@ -35,7 +35,7 @@ class m200514_223107_create_table_for_navigation_menu extends Migration
             'label',
             'icon',
             'url',
-            'active',
+            'subitems',
         ], [
             [
                 'id' => 1,
@@ -43,7 +43,7 @@ class m200514_223107_create_table_for_navigation_menu extends Migration
                 'label' => 'Доска заказов',
                 'icon' => 'fas fa-tachometer-alt',
                 'url' => '/admin/dashboard',
-                'active' => "'dashboard' === Yii::$app->controller->id",
+                'subitems' => "",
             ],
             [
                 'id' => 2,
@@ -51,7 +51,7 @@ class m200514_223107_create_table_for_navigation_menu extends Migration
                 'label' => 'Пользователи',
                 'icon' => 'fas fa-users',
                 'url' => '/admin/users',
-                'active' => "'users' === Yii::$app->controller->id",
+                'subitems' => "",
             ],
             [
                 'id' => 3,
@@ -59,7 +59,7 @@ class m200514_223107_create_table_for_navigation_menu extends Migration
                 'label' => 'Платежи',
                 'icon' => 'fas fa-ruble-sign',
                 'url' => '/admin/payments',
-                'active' => true,
+                'subitems' => true,
             ],
             [
                 'id' => 4,
@@ -67,7 +67,7 @@ class m200514_223107_create_table_for_navigation_menu extends Migration
                 'label' => 'Сообщения',
                 'icon' => 'far fa-comments',
                 'url' => '/admin/personal-messages',
-                'active' => true,
+                'subitems' => true,
             ],
             [
                 'id' => 5,
@@ -75,7 +75,7 @@ class m200514_223107_create_table_for_navigation_menu extends Migration
                 'label' => 'Доступы',
                 'icon' => 'fas fa-lock',
                 'url' => '/admin/rbac/permissions',
-                'active' => "'permissions' === Yii::$app->controller->id",
+                'subitems' => "",
             ],
             [
                 'id' => 6,
@@ -83,7 +83,7 @@ class m200514_223107_create_table_for_navigation_menu extends Migration
                 'label' => 'Настройки',
                 'icon' => 'fas fa-cog',
                 'url' => '#',
-                'active' => true,
+                'subitems' => true,
             ],
             [
                 'id' => 7,
@@ -91,7 +91,7 @@ class m200514_223107_create_table_for_navigation_menu extends Migration
                 'label' => 'Система',
                 'icon' => '',
                 'url' => '/admin/settings/app',
-                'active' => true,
+                'subitems' => true,
             ],
             [
                 'id' => 8,
@@ -99,7 +99,7 @@ class m200514_223107_create_table_for_navigation_menu extends Migration
                 'label' => 'Мои курсы',
                 'icon' => 'fas fa-television',
                 'url' => '#',
-                'active' => true,
+                'subitems' => true,
             ],
             [
                 'id' => 9,
@@ -107,7 +107,7 @@ class m200514_223107_create_table_for_navigation_menu extends Migration
                 'label' => 'Gii',
                 'icon' => '',
                 'url' => '/gii',
-                'active' => true,
+                'subitems' => true,
             ],
             [
                 'id' => 10,
@@ -115,7 +115,7 @@ class m200514_223107_create_table_for_navigation_menu extends Migration
                 'label' => 'Debug',
                 'icon' => '',
                 'url' => '/debug',
-                'active' => true,
+                'subitems' => true,
             ],
             [
                 'id' => 11,
@@ -123,7 +123,7 @@ class m200514_223107_create_table_for_navigation_menu extends Migration
                 'label' => 'Разработка',
                 'icon' => 'fas fa-code',
                 'url' => '#',
-                'active' => true,
+                'subitems' => true,
             ],
             [
                 'id' => 12,
@@ -131,7 +131,7 @@ class m200514_223107_create_table_for_navigation_menu extends Migration
                 'label' => 'Gii',
                 'icon' => '',
                 'url' => '/gii',
-                'active' => true,
+                'subitems' => true,
             ],
             [
                 'id' => 13,
@@ -139,8 +139,16 @@ class m200514_223107_create_table_for_navigation_menu extends Migration
                 'label' => 'Debug',
                 'icon' => '',
                 'url' => '/debug',
-                'active' => true,
-            ]
+                'subitems' => true,
+            ],
+            [
+                'id' => 14,
+                'parent_id' => 0,
+                'label' => 'Мои курсы',
+                'icon' => '',
+                'url' => 'course/index',
+                'subitems' => 'getCourseMenu',
+            ],
         ])->execute();
     }
 
