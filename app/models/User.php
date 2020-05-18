@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\helpers\FileHelper;
 use app\traits\models\WithStatus;
 use Yii;
 use yii\base\NotSupportedException;
@@ -24,6 +25,9 @@ use yii\web\IdentityInterface;
  * @property string $password write-only password
  * @property-read string fullName
  * @property-read string shortName
+ * @property string avatar
+ * @property string city
+ * @property string description
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -31,7 +35,13 @@ class User extends ActiveRecord implements IdentityInterface
 	
 	const STATUS_ACTIVE = 10;
 	const STATUS_BLOCKED = 0;
-	
+
+	/**
+	 * @var UploadedFile
+	 */
+	public $file;
+
+	public $description;
 	/**
 	 * @inheritdoc
 	 */
@@ -46,15 +56,56 @@ class User extends ActiveRecord implements IdentityInterface
 	public function rules()
 	{
 		return [
+			['file', 'image',
+				'extensions' => ['jpg', 'jpeg', 'png', 'gif'],
+				'checkExtensionByMimeType' => true,
+				'maxSize' => 1512000, // 500 килобайт = 500 * 1024 байта = 512 000 байт
+				'tooBig' => 'Limit is 1500KB'
+			],
 			['status', 'default', 'value' => self::STATUS_ACTIVE],
 			['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_BLOCKED]],
-			[['first_name', 'last_name', 'email', 'username'], 'string'],
+			[['first_name', 'last_name', 'email', 'username', 'avatar', 'city'], 'string'],
 			[['email', 'username'], 'unique'],
 			[['email', 'username'], 'required'],
 			['email', 'email'],
+			[['description'], 'exist', 'skipOnError' => true, 'targetClass' => TeacherProfile::className(), 'targetAttribute' => ['id' => 'user_id']],
 		];
 	}
-	
+
+	/**
+	 * Загружает файл с именем $userId.расширение в каталог avatars/
+	 * @param $userId        - ID user
+	 * @return bool          - true, если загружен успешно
+	 */
+	public function upload(string $filename)
+	{
+		if ($this->validate()) {
+			$dir =  Yii::getAlias('@avatars'); // Директория - должна быть создана
+			$file = $dir . '/' . $filename;
+			$this->file->saveAs($file); // Сохраняем файл
+			// Обрежет по ширине на 600px, по высоте пропорционально
+			FileHelper::resizeImage($file);
+
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'description' => 'Description',
+		];
+	}
+
+
+	public static function primaryKey()
+	{
+		return ['id'];
+	}
+
 	/**
 	 * User full name
 	 * (as first/last name)
@@ -254,5 +305,10 @@ class User extends ActiveRecord implements IdentityInterface
 	{
 		$this->password_reset_token = null;
 	}
-	
+
+	public function getTeacherProfile(){
+		return $this->hasOne(TeacherProfile::className(), ['user_id' => 'id']);
+	}
+
+
 }

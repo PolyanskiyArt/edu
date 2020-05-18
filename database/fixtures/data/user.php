@@ -601,4 +601,17 @@ return [
         'created_at' => 1503171681,
         'updated_at' => 1504328567,
     ],
+    'user50' => [
+        'first_name' => 'pup',
+        'last_name' => 'Gorgonov',
+        'username' => 'pup',
+        'email' => 'pup@bk.ru',
+        'password' => '12345',
+        'password_hash' => '$2y$13$imhKCC31fByn52qPOsKOUu7mKlaPLzKc8C1Cl4Q0WG9DD.rEsR8s.',
+        'auth_key' => '$2y$13$z3SmC/LGWwwGMp2VKKpExuJ8mV1di04GwbFkoLO16pSscDPpF/MRy',
+        'status' => 10,
+        'created_at' => 1503171681,
+        'updated_at' => 1504328567,
+    ],
+
 ];

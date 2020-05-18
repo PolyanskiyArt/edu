@@ -9,6 +9,9 @@ use yii\helpers\Html;
  * @var $model \app\modules\admin\forms\UserForm
  * @var $form yii\widgets\ActiveForm
  */
+
+$model['description'] = $model->teacherProfile->description ?? 'none';
+
 ?>
 
 <div class="user-form card">
@@ -29,6 +32,25 @@ use yii\helpers\Html;
         <?= $form->field($model, 'password')->passwordInput() ?>
 
         <?= $form->field($model, 'passwordRepeat')->passwordInput() ?>
+
+        <?= $form->field($model, 'file')->fileInput() ?>
+<?php
+        if (! is_null($model['avatar'])){
+            $dir =  Yii::getAlias('@avatars'); // Директория - должна быть создана
+            $file = $dir . '/' . $model['avatar'];
+
+            if (file_exists($file)) {
+                echo Html::img('../../../avatars/' . $model['avatar'], ['class' => 'img-circle', 'alt' => 'Аватар']);
+            }
+        }
+        ?>
+        <?= $form->field($model, 'city')->textInput() ?>
+
+        <?php
+        if ( \Yii::$app->user->can('teacher')) {
+            echo $form->field($model, 'description')->textInput();
+        }
+        ?>
 
         <?php
         if (\Yii::$app->user->can('administer')) {

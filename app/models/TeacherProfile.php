@@ -30,10 +30,9 @@ class TeacherProfile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['photo_path', 'description', 'user_id'], 'required'],
+            [['description', 'user_id'], 'required'],
             [['description'], 'string'],
             [['user_id'], 'integer'],
-            [['photo_path'], 'string', 'max' => 250],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -45,7 +44,6 @@ class TeacherProfile extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'photo_path' => 'Photo Path',
             'description' => 'Description',
             'user_id' => 'User ID',
         ];
