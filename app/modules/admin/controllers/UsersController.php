@@ -96,7 +96,6 @@ class UsersController extends Controller
          */
         $model = $this->findModel($id);
 
-
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
             $model->load($post);

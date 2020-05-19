@@ -1,5 +1,7 @@
 <?php
 
+use yii\bootstrap\Tabs;
+
 /* @var $this yii\web\View */
 /* @var $model \app\modules\admin\forms\UserForm */
 /* @var $roles array */
@@ -11,9 +13,28 @@ $this->params['heading'] = 'Редактирование';
 $this->params['subheading'] = $model->fullName;
 ?>
 <div class="user-update">
-	
-	<?= $this->render('_form', [
-		'model' => $model,
-	]) ?>
+
+
+    <?= Tabs::widget(
+        [
+            'items' => [
+                [
+                    'label' => 'Информация',
+                    'content' => $this->render('_form', ['model' => $model]),
+                    'active' => true,
+                ],
+                [
+                    'label' => 'Квалификация',
+                    'content' => 'Вкладка 2'
+                ],
+            ]
+        ]
+    )
+    ?>
+
+
+<!--    --><?//= $this->render('_form', [
+//		'model' => $model,
+//	]) ?>
 
 </div>

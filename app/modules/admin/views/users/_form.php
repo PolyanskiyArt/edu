@@ -14,6 +14,23 @@ $model['description'] = $model->teacherProfile->description ?? 'none';
 
 ?>
 
+<?php
+$dir = Yii::getAlias('@avatars'); // Директория - должна быть создана
+if (is_null($model['avatar'])) {
+    $file = 'nophoto.jpg';
+} else {
+    $file = $model['avatar'];
+    if (!file_exists($dir . '/' . $file)) {
+        $file = 'nophoto.jpg';
+    }
+
+}
+if (file_exists($dir . '/' . $file)) {
+    echo Html::img('../../../avatars/' . $file, ['class' => 'img-circle', 'alt' => 'Аватар']);
+}
+?>
+
+
 <div class="user-form card">
 
     <?php $form = ActiveForm::begin([
@@ -34,20 +51,10 @@ $model['description'] = $model->teacherProfile->description ?? 'none';
         <?= $form->field($model, 'passwordRepeat')->passwordInput() ?>
 
         <?= $form->field($model, 'file')->fileInput() ?>
-<?php
-        if (! is_null($model['avatar'])){
-            $dir =  Yii::getAlias('@avatars'); // Директория - должна быть создана
-            $file = $dir . '/' . $model['avatar'];
-
-            if (file_exists($file)) {
-                echo Html::img('../../../avatars/' . $model['avatar'], ['class' => 'img-circle', 'alt' => 'Аватар']);
-            }
-        }
-        ?>
         <?= $form->field($model, 'city')->textInput() ?>
 
         <?php
-        if ( \Yii::$app->user->can('teacher')) {
+        if (\Yii::$app->user->can('teacher')) {
             echo $form->field($model, 'description')->textInput();
         }
         ?>
