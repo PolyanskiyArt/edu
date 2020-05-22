@@ -8,7 +8,6 @@ use Yii;
  * This is the model class for table "teacher_profile".
  *
  * @property int $id
- * @property string $photo_path Путь к фото
  * @property string $description Описание опыта
  * @property int $user_id Ссылка на пользователя
  *

@@ -6,13 +6,13 @@
  * Time: 22:38
  */
 
-namespace app\api;
+namespace app\modules\api\controllers;
 
 use app\models\PersonalMessage;
 use Yii;
 use yii\helpers\StringHelper;
 
-class Messages extends PersonalMessage
+class MessagesController extends Controller
 {
 //.text-primary     - синий
 //.text-secondary   - серый
@@ -29,9 +29,14 @@ class Messages extends PersonalMessage
         "text-danger",
     ];
 
-    const DELAY_UPDATE = 5000;
+    const DELAY_UPDATE = 5000000;
 
-    public static function getLastMessages() : array
+    public function  actionIndex()
+    {
+        return "Это индекс";
+    }
+
+    public function actionGetLastMessages()
     {
 
         $queryParams[':me_id'] = Yii::$app->user->id;
@@ -62,8 +67,9 @@ class Messages extends PersonalMessage
             ->where(['is_new' => 1])
             ->count();
 
-        return compact('list', 'cnt');
+        $data = compact('list', 'cnt');
+
+        return $this->asJson($data);
 
     }
-
 }

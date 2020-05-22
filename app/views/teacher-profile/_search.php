@@ -17,8 +17,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'photo_path') ?>
-
     <?= $form->field($model, 'description') ?>
 
     <?= $form->field($model, 'user_id') ?>

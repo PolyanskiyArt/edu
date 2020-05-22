@@ -10,6 +10,7 @@ use app\traits\controllers\FindModelOrFail;
 use Yii;
 use yii\filters\VerbFilter;
 use app\helpers\FileHelper;
+use yii\web\Response;
 use yii\web\UploadedFile;
 
 /**
@@ -81,6 +82,7 @@ class UsersController extends Controller
         ]);
     }
 
+
     /**
      * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -91,9 +93,7 @@ class UsersController extends Controller
      */
     public function actionUpdate($id)
     {
-        /**
-         * @var UserForm $model
-         */
+        /* @var UserForm $model */
         $model = $this->findModel($id);
 
         if (Yii::$app->request->isPost) {
@@ -114,16 +114,35 @@ class UsersController extends Controller
 
             if ($model->file && $model->upload($model->avatar)) {
                 Yii::$app->session->setFlash('success', 'Аватар загружен');
-//                return $this->refresh();
             }
 
             return $this->redirect(['update', 'id' => $model->id]);
-
         }
 
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    public function actionTeacherUpdate($id)
+    {
+
+        /* @var UserForm $model */
+        $model_teacher =  TeacherProfile::find()->where(['user_id' => $id])->one() ?? (new TeacherProfile());
+        
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            $model_teacher->load($post);
+
+            if ($model_teacher->save(false)) {
+                Yii::$app->session->setFlash('success', 'Запись обновлена');
+            }
+
+            return $this->redirect('update', ['id' => $id]);
+
+        }
+
+        return $this->render('updateTeacher', compact('id'));
     }
 
     /**

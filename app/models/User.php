@@ -72,6 +72,38 @@ class User extends ActiveRecord implements IdentityInterface
 		];
 	}
 
+	public function convertBase64ToImage($photo = null, $path = null) {
+		if (!empty($photo)) {
+			$photo = str_replace('data:image/png;base64,', '', $photo);
+			$photo = str_replace(' ', '+', $photo);
+			$photo = str_replace('data:image/jpeg;base64,', '', $photo);
+			$photo = str_replace('data:image/gif;base64,', '', $photo);
+			$entry = base64_decode($photo);
+			$image = imagecreatefromstring($entry);
+
+//			$fileName = time() . ".jpeg";
+//			$directory = "uploads/customer/" . $fileName;
+			$directory = $path;
+			header('Content-type:image/jpeg');
+
+			if (!empty($path)) {
+				if (file_exists($path)) {
+					unlink($path);
+				}
+			}
+
+			$saveImage = imagejpeg($image, $directory);
+
+			imagedestroy($image);
+
+			if ($saveImage) {
+				return true;
+			} else {
+				return false; // image not saved
+			}
+		}
+	}
+
 	/**
 	 * Загружает файл с именем $userId.расширение в каталог avatars/
 	 * @param $userId        - ID user
@@ -82,7 +114,8 @@ class User extends ActiveRecord implements IdentityInterface
 		if ($this->validate()) {
 			$dir =  Yii::getAlias('@avatars'); // Директория - должна быть создана
 			$file = $dir . '/' . $filename;
-			$this->file->saveAs($file); // Сохраняем файл
+//			$this->file->saveAs($filename,); // Сохраняем файл
+			$this->convertBase64ToImage($this->file,$file);
 			// Обрежет по ширине на 600px, по высоте пропорционально
 			FileHelper::resizeImage($file);
 

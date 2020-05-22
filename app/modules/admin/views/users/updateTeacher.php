@@ -18,15 +18,16 @@ $this->params['subheading'] = $model->fullName;
     <?php
     $items[] = [
         'label' => 'Информация',
-        'content' => $this->render('_form', ['model' => $model]),
-        'active' => true,
+//        'content' => $this->render('_form', ['model' => $model]),
+        'url' => Yii::$app->urlManager->createUrl('admin/users/update?id=' . $model->id),
+        'active' => false,
     ];
 
     if (\Yii::$app->user->can('teacher')) {
         $items[] = [
             'label' => 'Квалификация',
             'content' => $this->render('_formTeacher', ['model' => $model]),
-//            'url' => Yii::$app->urlManager->createUrl('admin/users/teacher-update?id=' . $model->id),
+            'active' => true,
         ];
 //        echo $form->field($model, 'description')->textInput();
     }
