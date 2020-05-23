@@ -17,4 +17,6 @@ return [
 	'status' => 10,
 	'created_at' => $created,
 	'updated_at' => time() - rand(0, time() - $created),
+	'avatar' => 'nophoto.jpg',
+	'city' => 'noCity',
 ];
