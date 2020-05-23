@@ -18,7 +18,6 @@ class TeacherProfileSearch extends TeacherProfile
     {
         return [
             [['id', 'user_id'], 'integer'],
-            [['photo_path', 'description'], 'safe'],
         ];
     }
 
@@ -62,8 +61,7 @@ class TeacherProfileSearch extends TeacherProfile
             'user_id' => $this->user_id,
         ]);
 
-        $query->andFilterWhere(['like', 'photo_path', $this->photo_path])
-            ->andFilterWhere(['like', 'description', $this->description]);
+        $query->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

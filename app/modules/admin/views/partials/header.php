@@ -4,52 +4,6 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
 <!--<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>-->
-<script>
-
-    window.onload = function () {
-        var messages = new Vue({
-            el: '#messages',
-            data: {
-                MessagesCount: 0,
-                Messages: [],
-                error: '',
-                polling: null,
-            },
-            methods: {
-                getData(){
-                    axios
-                        .get("<?= Yii::$app->urlManager->createUrl('api/get');?>")
-                        .then(response => (this.MessagesCount = response.data.cnt, this.Messages = response.data.list))
-                        .catch(function (e) {
-                            this.error = e;
-                            console.log(e);
-                    });
-                },
-                updateData() {
-                    this.polling = setInterval( () => {
-                            this.getData();
-                }, <?= \app\api\Messages::DELAY_UPDATE ?>);
-                },
-                go(id){
-                    window.location = "<?= Yii::$app->urlManager->createUrl('admin/personal-messages/list?id=');?>"+id;
-                }
-            },
-            beforeDestroy () {
-                clearInterval(this.polling)
-            },
-            mounted: function () {
-                this.getData();
-                this.updateData();
-            }
-        });
-        var notifications = new Vue({
-            el: '#notifications',
-            data: {
-                NotificationsCount: 15
-            }
-        })
-    }
-</script>
 <header class="main-header">
     <nav class="navbar navbar-expand navbar-white navbar-light border-bottom">
         <!-- Left navbar links -->
@@ -130,3 +84,50 @@
         </ul>
     </nav>
 </header>
+
+<script>
+
+    //    window.onload = function () {
+    var messages = new Vue({
+        el: '#messages',
+        data: {
+            MessagesCount: 0,
+            Messages: [],
+            error: '',
+            polling: null,
+        },
+        methods: {
+            getData(){
+                axios
+                    .get("<?= Yii::$app->urlManager->createUrl('api/messages/get-last-messages');?>")
+                    .then(response => (this.MessagesCount = response.data.cnt, this.Messages = response.data.list))
+            .catch(function (e) {
+                    this.error = e;
+                    console.log(e);
+                });
+            },
+            updateData() {
+                this.polling = setInterval( () => {
+                        this.getData();
+            }, <?= \app\modules\api\controllers\MessagesController::DELAY_UPDATE ?>);
+            },
+            go(id){
+                window.location = "<?= Yii::$app->urlManager->createUrl('admin/personal-messages/list?id=');?>"+id;
+            }
+        },
+        beforeDestroy () {
+            clearInterval(this.polling)
+        },
+        mounted: function () {
+            this.getData();
+            this.updateData();
+        }
+    });
+    var notifications = new Vue({
+        el: '#notifications',
+        data: {
+            NotificationsCount: 15
+        }
+    })
+    //    }
+</script>
