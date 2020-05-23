@@ -9,7 +9,7 @@ class LoginFormCest
 
 	public function openLoginPage(\FunctionalTester $I)
 	{
-		$I->see('Login', 'h1');
+		$I->see('Вход', 'h1');
 	}
 
 	// demonstrates `amLoggedInAs` method
@@ -19,7 +19,7 @@ class LoginFormCest
 
 		$I->amLoggedInAs(1);
 		$I->amOnPage('/');
-		$I->see("Logout ($user->username)");
+		$I->see("Logout($user->username)");
 	}
 
 	// demonstrates `amLoggedInAs` method
@@ -28,7 +28,7 @@ class LoginFormCest
 		$user = \app\models\User::findIdentity(1);
 		$I->amLoggedInAs($user);
 		$I->amOnPage('/');
-		$I->see("Logout ($user->username)");
+		$I->see("Logout($user->username)");
 	}
 
 	public function loginWithEmptyCredentials(\FunctionalTester $I)
@@ -55,9 +55,9 @@ class LoginFormCest
 
 		$I->submitForm('#login-form', [
 			'LoginForm[username]' => $user->username,
-			'LoginForm[password]' => 'password_0',
+			'LoginForm[password]' => '12345',
 		]);
-		$I->see("Logout ($user->username)");
+		$I->see("Logout($user->username)");
 		$I->dontSeeElement('form#login-form');
 	}
 }
