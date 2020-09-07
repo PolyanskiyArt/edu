@@ -4,7 +4,7 @@ namespace app\widgets;
 
 use yii\base\Widget;
 
-class Course extends Widget
+class Chat extends Widget
 {
     /**
      * @var \yii\base\Model the model that keeps the user-entered filter data. When this property is set,
@@ -19,14 +19,14 @@ class Course extends Widget
      */
     public $filterModel;
     /**
-     * @var Course[].
+     * @var Message[].
      */
-    public $courses;
+    public $messages;
 
     public function run()
     {
-        return $this->render('Сourse', [
-            'courses' => $this->courses
+        return $this->render('Chat', [
+            'messages' => $this->messages
         ]);
     }
 }

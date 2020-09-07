@@ -181,4 +181,55 @@ class PersonalMessageSearch extends PersonalMessage
 
         return $dataProvider;
     }
+
+    /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return SqlDataProvider
+     */
+    public function searchChat($params)
+    {
+        $me_id = Yii::$app->user->id;
+
+        $queryParams[':me_id'] = $me_id;
+
+        $sql = 'SELECT u.username, tt.from_user_id, SUM(tt.is_new) mess_count, tt.last_mess ' .
+	            'FROM user u ' .
+	            'LEFT JOIN (SELECT pp.from_user_id, is_new, LAST_VALUE(pp.text) OVER (partition BY from_user_id) last_mess FROM personal_message pp) tt ON u.id=tt.from_user_id ' .
+                'WHERE u.id<>:me_id ' .
+	            'GROUP BY u.id ' .
+	            'ORDER BY mess_count DESC';
+
+        $queryCount = 'SELECT COUNT(*)-1 FROM user u';
+
+        $count = (int)Yii::$app->db->createCommand($queryCount, $queryParams)->queryScalar();
+
+        $dataProvider = new SqlDataProvider([
+            'sql' => $sql,
+            'totalCount' => (int)$count, //$queryCount,
+            'sort' => [
+                'attributes' => [
+                    'from_user',
+                    'to_user',
+                    'is_new',
+                    'important_state',
+                    'text',
+                    'created_at',
+                ],
+            ],
+            'pagination' => [
+//                'forcePageParam' => true,
+//                'pageSizeParam' => true,
+//                'pageParam' => 'active',
+                'pageSize' => 10,
+            ],
+        ]);
+
+//        $dataProvider->totalCount = $count;
+        $dataProvider->params = $queryParams;
+
+        return $dataProvider;
+    }
 }

@@ -15,7 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php $this->beginBlock('content-title'); ?>
 <?php $this->endBlock(); ?>
 
-
 <div class="payment-index">
 
     <?= $this->render('_search', ['model' => $searchModel]) ?>
